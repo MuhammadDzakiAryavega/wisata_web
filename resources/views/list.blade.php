@@ -7,17 +7,19 @@
     <h1 class="mb-4">Daftar Wisata</h1>
 
     <div class="mt-3 text-end">
-      <a href="{{ route('wisata.create') }}" class="btn btn-primary">
-        <i class="fas fa-plus-circle"></i> Tambah Wisata
-      </a>
+        <a href="{{ route('wisata.create') }}" class="btn btn-primary">
+            <i class="fas fa-plus-circle"></i> Tambah Wisata
+        </a>
     </div>
 
+    {{-- Notifikasi sukses --}}
     @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+        <div class="alert alert-success mt-3">{{ session('success') }}</div>
     @endif
 
+    {{-- Tabel data wisata --}}
     @if($wisatas->count())
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped mt-3">
         <thead class="table-success">
             <tr>
                 <th>No</th>
@@ -60,11 +62,12 @@
         </tbody>
     </table>
 
+    {{-- Pagination --}}
     <div class="mt-4">
         {{ $wisatas->links('pagination::bootstrap-5') }}
     </div>
     @else
-        <div class="alert alert-info">Belum ada data wisata.</div>
+        <div class="alert alert-info mt-4">Belum ada data wisata.</div>
     @endif
 </div>
 @endsection

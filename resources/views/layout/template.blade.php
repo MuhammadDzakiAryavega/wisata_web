@@ -29,7 +29,7 @@
     .navbar {
       padding-top: 0.4rem;
       padding-bottom: 0.4rem;
-      font-size: 0.9rem;
+      font-size: 1rem;
     }
 
     .navbar-brand img {
@@ -38,11 +38,12 @@
     }
 
     .navbar-brand span {
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       font-weight: 500;
     }
 
     .nav-link {
+      font-size: 1.05rem;
       padding: 0.4rem 0.8rem;
       transition: color 0.3s;
     }
@@ -53,12 +54,12 @@
 
     .form-control {
       height: 32px;
-      font-size: 0.9rem;
+      font-size: 1rem;
     }
 
     .btn-outline-light {
       padding: 4px 12px;
-      font-size: 0.85rem;
+      font-size: 1rem;
     }
 
     .navbar-toggler {
@@ -99,7 +100,7 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
           <li class="nav-item"><a class="nav-link active" href="/form">Destination</a></li>
-          <li class="nav-item"><a class="nav-link active" href="/list">List</a></li>
+          <li class="nav-item"><a class="nav-link active" href="/list">List Data</a></li>
         </ul>
 
         <!-- Search -->

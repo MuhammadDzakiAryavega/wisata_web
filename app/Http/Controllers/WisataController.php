@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Wisata;
 use App\Models\Category;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
 class WisataController extends Controller
 {
@@ -109,17 +110,16 @@ public function edit($id)
     }
 
     public function destroy($id)
-    {
+   {
     $wisata = Wisata::findOrFail($id);
-    // Hapus gambar
+
     if ($wisata->cover_image && File::exists(public_path('images/' . $wisata->cover_image))) {
         File::delete(public_path('images/' . $wisata->cover_image));
     }
+
     $wisata->delete();
 
-    return redirect()->route('wisata.destroy')->with('success', 'Data wisata berhasil dihapus!');
-   }
-
-   
+    return redirect()->route('wisata.list')->with('success', 'Data wisata berhasil dihapus!');
+    }
 
 }
