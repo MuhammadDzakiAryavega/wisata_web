@@ -75,7 +75,7 @@
     footer {
       font-size: 0.85rem;
       color: white;
-      background-color: rgb(1, 179, 40); /* agar menyatu dengan hero */
+      background-color: rgb(14, 124, 38); /* agar menyatu dengan hero */
       text-align: center;
       padding: 1rem;
     }
@@ -98,7 +98,7 @@
       <div class="collapse navbar-collapse" id="navbarContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
-          <li class="nav-item"><a class="nav-link active" href="/list">Destination</a></li>
+          <li class="nav-item"><a class="nav-link active" href="/form">Destination</a></li>
           <li class="nav-item"><a class="nav-link active" href="/wisata/create">Add Wisata</a></li>
         </ul>
 

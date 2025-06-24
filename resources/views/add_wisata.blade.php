@@ -15,7 +15,7 @@
 
     <form action="{{ route('wisata.store') }}" method="POST" enctype="multipart/form-data">
       @csrf
-      <a href="" class="btn btn-primary mb-3">Data Wisata</a>
+      <a href="/" class="btn btn-primary mb-3">Data Wisata</a>
 
       <div class="mb-3">
         <label for="title" class="form-label">Nama Wisata</label>

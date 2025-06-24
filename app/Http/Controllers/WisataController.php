@@ -17,10 +17,10 @@ class WisataController extends Controller
     }
 
     // Tampilkan data wisata dalam daftar
-    public function list()
+    public function form()
     {
         $wisatas = Wisata::all();
-        return view('list', compact('wisatas'));
+        return view('form', compact('wisatas'));
     }
 
     // Tampilkan form untuk menambah wisata
@@ -55,7 +55,7 @@ class WisataController extends Controller
     // Simpan ke database
     Wisata::create($data);
 
-    return redirect()->route('list')->with('success', 'Data wisata berhasil ditambahkan!');
+    return redirect()->route('form')->with('success', 'Data wisata berhasil ditambahkan!');
 }
 
 }
