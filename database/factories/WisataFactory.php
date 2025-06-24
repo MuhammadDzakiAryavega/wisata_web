@@ -31,4 +31,5 @@ class WisataFactory extends Factory
             'updated_at' => now(),
         ];
     }
+    
 }

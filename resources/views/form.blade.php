@@ -24,7 +24,7 @@
                             <p class="card-text mb-3">
                                 {{ \Illuminate\Support\Str::limit($wisata->description, 100) }}
                             </p>
-                            <a href="#" class="btn btn-primary mt-auto">Lihat Detail</a>
+                            <a href="{{ route('wisata.show', $wisata->id) }}" class="btn btn-primary mt-auto">Lihat Detail</a>
                         </div>
                     </div>
                 </div>

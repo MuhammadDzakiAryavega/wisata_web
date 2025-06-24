@@ -32,7 +32,7 @@ class WisataController extends Controller
     
     // Proses simpan data wisata ke database
     public function store(Request $request)
-{
+    {
     $request->validate([
         'title' => 'required|string|max:255',
         'kecamatan' => 'required|string|max:255',
@@ -56,6 +56,70 @@ class WisataController extends Controller
     Wisata::create($data);
 
     return redirect()->route('form')->with('success', 'Data wisata berhasil ditambahkan!');
+    }
+
+    public function list()
+   {
+    $wisatas = Wisata::with('category')->paginate(10);
+    return view('list', compact('wisatas'));
+   }
+   
+   public function show($id)
+   {
+    $wisata = Wisata::with('category')->findOrFail($id);
+    return view('wisata.detail_wisata', compact('wisata'));
+   }
+
+public function edit($id)
+{
+    $wisata = Wisata::findOrFail($id);
+    $categories = Category::all();
+    return view('edit_wisata', compact('wisata', 'categories'));
 }
+
+    public function update(Request $request, $id)
+    {
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'kecamatan' => 'required|string|max:255',
+        'description' => 'required|string',
+        'year' => 'required|numeric',
+        'category_id' => 'required|numeric',
+        'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+
+    $wisata = Wisata::findOrFail($id);
+    $data = $request->only(['title', 'kecamatan', 'description', 'year', 'category_id']);
+    $data['slug'] = Str::slug($request->title);
+
+    if ($request->hasFile('cover_image')) {
+        // Hapus gambar lama jika ada
+        if ($wisata->cover_image && File::exists(public_path('images/' . $wisata->cover_image))) {
+            File::delete(public_path('images/' . $wisata->cover_image));
+        }
+
+        $file = $request->file('cover_image');
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('images'), $filename);
+        $data['cover_image'] = $filename;
+    }
+
+    $wisata->update($data);
+    return redirect()->route('wisata.edit', $id)->with('success', 'Data wisata berhasil diperbarui!');
+    }
+
+    public function destroy($id)
+    {
+    $wisata = Wisata::findOrFail($id);
+    // Hapus gambar
+    if ($wisata->cover_image && File::exists(public_path('images/' . $wisata->cover_image))) {
+        File::delete(public_path('images/' . $wisata->cover_image));
+    }
+    $wisata->delete();
+
+    return redirect()->route('wisata.destroy')->with('success', 'Data wisata berhasil dihapus!');
+   }
+
+   
 
 }

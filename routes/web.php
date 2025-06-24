@@ -11,6 +11,21 @@ Route::get('/wisata/create', [WisataController::class, 'create'])->name('wisata.
 
 Route::post('/wisata', [WisataController::class, 'store'])->name('wisata.store');
 // (Opsional) Index wisata
-Route::get('/wisata', [WisataController::class, 'index'])->name('wisata.index');
 
+Route::get('/list', [WisataController::class, 'list'])->name('wisata.list');
 
+Route::get('/wisata/{id}', [WisataController::class, 'show'])->name('wisata.show');
+
+Route::get('/wisata/{id}/edit', [WisataController::class, 'edit'])->name('wisata.edit');
+
+Route::put('/wisata/{id}', [WisataController::class, 'update'])->name('wisata.update');
+
+Route::delete('/wisata/{id}', [WisataController::class, 'destroy'])->name('wisata.destroy');
+
+//Route::get('/wisata/{id}', [WisataController::class, 'show'])->name('wisata.show');
+
+//Route::get('/wisata/{id}/edit', [WisataController::class, 'edit'])->name('wisata.edit');
+
+//Route::delete('/wisata/{id}', [WisataController::class, 'destroy'])->name('wisata.destroy');
+
+//Route::get('/wisata/{id}', [WisataController::class, 'show'])->name('wisata.show');

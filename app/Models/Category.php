@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    public function wisata(): HasMany
+    public function wisatas()
     {
         return $this->hasMany(Wisata::class);
     }
