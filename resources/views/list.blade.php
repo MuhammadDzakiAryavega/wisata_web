@@ -36,7 +36,8 @@
         <tbody>
             @foreach ($wisatas as $wisata)
             <tr>
-                <td>{{ $loop->iteration }}</td>
+                {{-- Nomor urut global --}}
+                <td>{{ $wisatas->firstItem() + $loop->index }}</td>
                 <td>{{ $wisata->title }}</td>
                 <td>{{ Str::limit($wisata->description, 100) }}</td>
                 <td>{{ $wisata->kabupaten->kabupaten_name ?? '-' }}</td>

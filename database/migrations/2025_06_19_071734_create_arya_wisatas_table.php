@@ -12,6 +12,7 @@ return new class extends Migration
             $table->id();
             $table->string('title'); // ganti dari 'name' agar sesuai factory
             $table->string('slug')->unique();
+            $table->foreignId('kabupaten_id')->constrained('kabupatens')->onDelete('cascade');
             $table->string('kecamatan');
             $table->text('description');
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Support\Str;
 use App\Models\Category;
+use App\Models\Kabupaten;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,12 +19,13 @@ class WisataFactory extends Factory
 
         // Ambil ID kategori yang valid, jika tidak ada buat satu
         $categoryId = Category::inRandomOrder()->value('id') ?? Category::factory()->create()->id;
+        $kabupatenId = Kabupaten::inRandomOrder()->value('id') ?? Kabupaten::factory()->create()->id;
 
         return [
             'title' => $title,
             'slug' => $slug,
             'description' => fake()->paragraphs(rand(2, 4), true),
-            'kabupaten' => $kabupatenId,
+            'kabupaten_id' => $kabupatenId,
             'kecamatan' => fake()->city(),
             'category_id' => $categoryId,
             'year' => fake()->year(),
