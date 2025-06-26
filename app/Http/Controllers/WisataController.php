@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Wisata;
 use App\Models\Category;
+use App\Models\Kabupaten;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 
@@ -28,7 +29,8 @@ class WisataController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('add_wisata', compact('categories'));
+        $kabupatens = Kabupaten::all();
+        return view('add_wisata', compact('categories', 'kabupatens'));
     }
     
     // Proses simpan data wisata ke database
@@ -36,6 +38,7 @@ class WisataController extends Controller
     {
     $request->validate([
         'title' => 'required|string|max:255',
+        'kabupaten_id' => 'required|numeric',
         'kecamatan' => 'required|string|max:255',
         'description' => 'required|string',
         'year' => 'required|numeric',
@@ -43,7 +46,7 @@ class WisataController extends Controller
         'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
     ]);
 
-    $data = $request->only(['title', 'kecamatan', 'description', 'year', 'category_id']);
+    $data = $request->only(['title', 'kabupaten_id', 'kecamatan', 'description', 'year', 'category_id']);
     $data['slug'] = \Str::slug($request->title);
 
     if ($request->hasFile('cover_image')) {
@@ -75,13 +78,15 @@ class WisataController extends Controller
    {  
     $wisata = Wisata::findOrFail($id);
     $categories = Category::all();
-    return view('edit_wisata', compact('wisata', 'categories'));
+    $kabupatens = Kabupaten::all();
+    return view('edit_wisata', compact('wisata', 'categories', 'kabupatens'));
    }
 
     public function update(Request $request, $id)
     {
     $request->validate([
         'title' => 'required|string|max:255',
+        'kabupaten_id' => 'required|numeric',
         'kecamatan' => 'required|string|max:255',
         'description' => 'required|string',
         'year' => 'required|numeric',
@@ -90,7 +95,7 @@ class WisataController extends Controller
     ]);
 
     $wisata = Wisata::findOrFail($id);
-    $data = $request->only(['title', 'kecamatan', 'description', 'year', 'category_id']);
+    $data = $request->only(['title', 'kabupaten_id', 'kecamatan', 'description', 'year', 'category_id']);
     $data['slug'] = Str::slug($request->title);
 
     if ($request->hasFile('cover_image')) {

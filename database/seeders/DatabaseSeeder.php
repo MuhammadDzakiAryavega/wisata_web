@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Wisata;
 use App\Models\Category;
+use App\Models\Kabupaten;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,7 +18,8 @@ class DatabaseSeeder extends Seeder
         // Buat kategori manual
         //$this->call(CategorySeeder::class);
         // Buat data dummy lainnya
-         Wisata::factory()->count(20)->create();
+        //Wisata::factory()->count(20)->create();
+        $this->call(KabupatenSeeder::class);
         // User::factory(5)->create();
     }
 }

@@ -25,6 +25,18 @@
         </div>
 
         <div class="mb-3">
+          <label for="kabupaten_id" class="form-label">Kategori</label>
+          <select class="form-select" name="kabupaten_id" required>
+            <option value="" disabled>Pilih Kategori</option>
+            @foreach ($kabupatens as $kabupaten)
+              <option value="{{ $kabupaten->id }}" {{ $wisata->kabupaten_id == $kabupaten->id ? 'selected' : '' }}>
+                {{ $kabupaten->kabupaten_name }}
+              </option>
+            @endforeach
+          </select>
+        </div>
+
+        <div class="mb-3">
           <label for="kecamatan" class="form-label">Kecamatan</label>
           <input type="text" class="form-control" id="kecamatan" name="kecamatan" value="{{ $wisata->kecamatan }}" required>
         </div>

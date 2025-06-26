@@ -19,6 +19,7 @@
             <div class="col-md-7">
                 <div class="card-body">
                     <h3 class="card-title">{{ $wisata->title }}</h3>
+                    <p><strong>Kabupaten:</strong> {{ $wisata->kabupaten->kabupaten_name ?? '-' }}</p>
                     <p><strong>Kecamatan:</strong> {{ $wisata->kecamatan }}</p>
                     <p><strong>Deskripsi:</strong> {{ $wisata->description }}</p>
                     <p><strong>Tahun di buat:</strong> {{ $wisata->year }}</p>

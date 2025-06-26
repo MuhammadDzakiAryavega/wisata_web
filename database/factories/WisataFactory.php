@@ -23,6 +23,7 @@ class WisataFactory extends Factory
             'title' => $title,
             'slug' => $slug,
             'description' => fake()->paragraphs(rand(2, 4), true),
+            'kabupaten' => $kabupatenId,
             'kecamatan' => fake()->city(),
             'category_id' => $categoryId,
             'year' => fake()->year(),

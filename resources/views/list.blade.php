@@ -25,6 +25,7 @@
                 <th>No</th>
                 <th>Judul</th>
                 <th>Deskripsi</th>
+                <th>Kabupaten</th>
                 <th>Kecamatan</th>
                 <th>Tahun</th>
                 <th>Kategori</th>
@@ -38,6 +39,7 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $wisata->title }}</td>
                 <td>{{ Str::limit($wisata->description, 100) }}</td>
+                <td>{{ $wisata->kabupaten->kabupaten_name ?? '-' }}</td>
                 <td>{{ $wisata->kecamatan }}</td>
                 <td>{{ $wisata->year }}</td>
                 <td>{{ $wisata->category->category_name ?? '-' }}</td>
