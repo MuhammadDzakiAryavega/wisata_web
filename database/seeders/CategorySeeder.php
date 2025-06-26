@@ -50,6 +50,24 @@ class CategorySeeder extends Seeder
          'created_at' => now(),
          'updated_at' => now(),
            ],
+           [
+         'category_name' => 'museum',
+         'description' => 'museum tempat peninggalan bersejarah',
+         'created_at' => now(),
+         'updated_at' => now(),
+           ],
+           [
+         'category_name' => 'gunung',
+         'description' => 'tempat para pendaki',
+         'created_at' => now(),
+         'updated_at' => now(),
+           ],
+           [
+         'category_name' => 'pulai',
+         'description' => 'bermain laut-lautan',
+         'created_at' => now(),
+         'updated_at' => now(),
+           ],
        ]
       );
     }

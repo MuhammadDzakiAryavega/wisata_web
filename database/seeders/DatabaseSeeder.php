@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         // Buat kategori manual
         //$this->call(CategorySeeder::class);
         // Buat data dummy lainnya
-        Wisata::factory()->count(30)->create();
+        //Wisata::factory()->count(30)->create();
         //$this->call(KabupatenSeeder::class);
         // User::factory(5)->create();
     }

@@ -7,7 +7,7 @@
 <style>
 .hero-section {
     position: relative;
-    background: url('/images/mesjid_raya.jpg') no-repeat center center/cover;
+    background: url('/images/icons.jpg') no-repeat center center/cover;
     min-height: 100vh;
     width: 100%;
     color: white;
