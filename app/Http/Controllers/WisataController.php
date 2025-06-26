@@ -71,12 +71,12 @@ class WisataController extends Controller
     return view('wisata.detail_wisata', compact('wisata'));
    }
 
-public function edit($id)
-{
+    public function edit($id)
+   {  
     $wisata = Wisata::findOrFail($id);
     $categories = Category::all();
     return view('edit_wisata', compact('wisata', 'categories'));
-}
+   }
 
     public function update(Request $request, $id)
     {

@@ -24,7 +24,7 @@
                     <p><strong>Tahun di buat:</strong> {{ $wisata->year }}</p>
                     <p><strong>Kategori:</strong> {{ $wisata->category->category_name ?? '-' }}</p>
 
-                    <a href="{{ route('wisata.list') }}" class="btn btn-secondary mt-3">Kembali ke List</a>
+                    <a href="/form" class="btn btn-secondary mt-3">Back</a>
                 </div>
             </div>
         </div>

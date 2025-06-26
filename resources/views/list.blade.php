@@ -8,7 +8,7 @@
 
     <div class="mt-3 text-end">
         <a href="{{ route('wisata.create') }}" class="btn btn-primary">
-            <i class="fas fa-plus-circle"></i> Tambah Wisata
+            <i class="fas fa-plus-circle"></i> Add Wisata
         </a>
     </div>
 
@@ -54,7 +54,7 @@
                     <form action="{{ route('wisata.destroy', $wisata->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                     </form>
                 </td>
             </tr>

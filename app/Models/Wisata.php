@@ -13,6 +13,7 @@ class Wisata extends Model
     protected $fillable = [
         'title',
         'slug',
+        'kabupaten_id',
         'kecamatan',
         'description',
         'category_id',
@@ -23,5 +24,10 @@ class Wisata extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function kabupaten(): BelongsTo
+    {
+        return $this->belongsTo(Kabupaten::class);
     }
 }
