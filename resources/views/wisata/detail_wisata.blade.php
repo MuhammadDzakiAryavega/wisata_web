@@ -22,7 +22,7 @@
                     <p><strong>Kabupaten:</strong> {{ $wisata->kabupaten->kabupaten_name ?? '-' }}</p>
                     <p><strong>Kecamatan:</strong> {{ $wisata->kecamatan }}</p>
                     <p><strong>Deskripsi:</strong> {{ $wisata->description }}</p>
-                    <p><strong>Tahun di buat:</strong> {{ $wisata->year }}</p>
+                    <p><strong>Tahun di resmikan:</strong> {{ $wisata->year }}</p>
                     <p><strong>Kategori:</strong> {{ $wisata->category->category_name ?? '-' }}</p>
 
                     <a href="/form" class="btn btn-secondary mt-3">Back</a>

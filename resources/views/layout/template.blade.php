@@ -19,7 +19,27 @@
       padding: 0;
       font-family: 'Poppins', sans-serif;
       font-size: 0.92rem;
-      background-color: transparent; /* Menghindari latar belakang putih */
+      background-color: transparent;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1;
+      padding: 0;
+      margin: 0;
+      background-color: transparent;
+    }
+
+    footer {
+      font-size: 0.85rem;
+      color: white;
+      background-color: rgb(14, 124, 38);
+      text-align: center;
+      padding: 1rem;
     }
 
     * {
@@ -65,20 +85,6 @@
     .navbar-toggler {
       padding: 0.25rem 0.5rem;
       font-size: 0.875rem;
-    }
-
-    main {
-      padding: 0;
-      margin: 0;
-      background-color: transparent;
-    }
-
-    footer {
-      font-size: 0.85rem;
-      color: white;
-      background-color: rgb(14, 124, 38); /* agar menyatu dengan hero */
-      text-align: center;
-      padding: 1rem;
     }
   </style>
 </head>
@@ -138,7 +144,7 @@
     @yield('content')
   </main>
 
-  <!-- Footer -->
+  <!-- Footer Sticky -->
   <footer>
     <small>&copy; {{ date('Y') }} by Arya A.Md.Kom. All rights reserved.</small>
   </footer>

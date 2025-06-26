@@ -6,6 +6,7 @@
 <div class="container mt-4">
     <h1 class="mb-4">Daftar Wisata</h1>
 
+    {{-- Tombol tambah --}}
     <div class="mt-3 text-end">
         <a href="{{ route('wisata.create') }}" class="btn btn-primary">
             <i class="fas fa-plus-circle"></i> Add Wisata
@@ -19,7 +20,7 @@
 
     {{-- Tabel data wisata --}}
     @if($wisatas->count())
-    <table class="table table-bordered table-striped mt-3">
+    <table class="table table-bordered table-striped table-sm mt-3">
         <thead class="table-success">
             <tr>
                 <th>No</th>
@@ -36,7 +37,6 @@
         <tbody>
             @foreach ($wisatas as $wisata)
             <tr>
-                {{-- Nomor urut global --}}
                 <td>{{ $wisatas->firstItem() + $loop->index }}</td>
                 <td>{{ $wisata->title }}</td>
                 <td>{{ Str::limit($wisata->description, 100) }}</td>
@@ -52,8 +52,8 @@
                     @endif
                 </td>
                 <td>
-                    <a href="{{ route('wisata.show', $wisata->id) }}" class="btn btn-success btn-sm">Detail</a>
-                    <a href="{{ route('wisata.edit', $wisata->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{{ route('wisata.show', $wisata->id) }}" class="btn btn-success btn-sm mb-1">Detail</a>
+                    <a href="{{ route('wisata.edit', $wisata->id) }}" class="btn btn-warning btn-sm mb-1">Edit</a>
                     <form action="{{ route('wisata.destroy', $wisata->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
                         @csrf
                         @method('DELETE')
@@ -66,11 +66,38 @@
     </table>
 
     {{-- Pagination --}}
-    <div class="mt-4">
+    <div class="mt-3">
         {{ $wisatas->links('pagination::bootstrap-5') }}
     </div>
     @else
         <div class="alert alert-info mt-4">Belum ada data wisata.</div>
     @endif
 </div>
+
+{{-- CSS tambahan untuk memperkecil padding dan jarak baris --}}
+<style>
+    table.table {
+        font-size: 14px; /* Tambahkan ini untuk memperbesar */
+    }
+
+    table.table tr {
+        line-height: 1.3rem; /* Sesuaikan juga line-height agar tidak terlalu rapat */
+    }
+
+    table.table td, table.table th {
+        padding-top: 6px;
+        padding-bottom: 6px;
+        vertical-align: middle;
+    }
+
+    table.table img {
+        max-height: 64px;
+        object-fit: cover;
+    }
+
+    .btn-sm {
+        padding: 3px 8px;
+        font-size: 0.8rem;
+    }
+</style>
 @endsection
