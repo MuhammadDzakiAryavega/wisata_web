@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WisataController;
 use App\Http\Controllers\ContactController;
-use App\Http\Middleware\isAdmin;
+use App\Http\Middleware\IsAdmin;
+use App\Http\Controllers\AuthController;
 
 Route::get('/', [WisataController::class, 'index'])->name('home');
 
@@ -33,7 +34,27 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 
 Route::get('/dashboard', [WisataController::class, 'dashboard']);
 
-Route::get('/dashboard', function () {return view('admin.dashboard');})->middleware('is_admin');
+Route::middleware([IsAdmin::class])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    });
+});
+
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+// Logout
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Halaman redirect
+//Route::get('/', function () { return view('user.home');})->middleware('is_user');
+
+//Route::get('/dashboard', function () { return view('admin.dashboard');})->middleware('is_admin');
 
 //Route::get('/wisata/{id}', [WisataController::class, 'show'])->name('wisata.show');
 

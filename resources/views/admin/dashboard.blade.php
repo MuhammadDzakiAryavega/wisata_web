@@ -15,6 +15,7 @@
             margin: 0;
             padding: 0;
             overflow-x: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .sidebar {
@@ -26,6 +27,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            z-index: 1000;
         }
 
         .sidebar.expanded {
@@ -86,10 +88,36 @@
             width: calc(100% - 200px);
         }
 
-        .dashboard-image {
+        .dashboard-wrapper {
+            position: relative;
             width: 100%;
             height: 100vh;
+            overflow: hidden;
+        }
+
+        .dashboard-image {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
+            filter: brightness(0.6);
+        }
+
+        .dashboard-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+        }
+
+        .dashboard-overlay h1 {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .dashboard-overlay p {
+            font-size: 1.2rem;
         }
     </style>
 </head>
@@ -108,23 +136,40 @@
 
         <a href="{{ url('/wisata') }}" class="menu-item">
             <i class="fas fa-table"></i>
-            <span>Data masukan</span>
+            <span>Data Masukan</span>
         </a>
 
-        <a href="/" class="menu-item mt-auto mb-4">
+        <a href="#" class="menu-item mt-auto mb-4" onclick="event.preventDefault(); confirmLogout();">
             <i class="fas fa-sign-out-alt"></i>
             <span>Logout</span>
         </a>
+
+        {{-- Form logout tersembunyi --}}
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
     </div>
 
     {{-- Konten Utama --}}
     <div class="content">
-        <img src="{{ asset('images/dashboard.jpg') }}" alt="Dashboard Image" class="dashboard-image">
+        <div class="dashboard-wrapper">
+            <img src="{{ asset('images/dashboard2.jpg') }}" alt="Dashboard Image" class="dashboard-image">
+            <div class="dashboard-overlay">
+                <h1>Selamat Datang di halaman Dashboard</h1>
+                <p>Kelola data wisata Anda dengan mudah dan efisien.</p>
+            </div>
+        </div>
     </div>
 
     <script>
         function toggleSidebar() {
             document.getElementById('sidebar').classList.toggle('expanded');
+        }
+
+        function confirmLogout() {
+            if (confirm("Apakah Anda yakin ingin keluar?")) {
+                document.getElementById('logout-form').submit();
+            }
         }
     </script>
 
