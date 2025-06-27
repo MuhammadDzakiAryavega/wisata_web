@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Wisata;
 use App\Models\Category;
 use App\Models\Kabupaten;
+use App\Models\Contact;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,6 +20,7 @@ class DatabaseSeeder extends Seeder
         //$this->call(CategorySeeder::class);
         // Buat data dummy lainnya
         //Wisata::factory()->count(30)->create();
+        $this->call(ContactSeeder::class);
         //$this->call(KabupatenSeeder::class);
         // User::factory(5)->create();
     }

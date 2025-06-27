@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WisataController;
+use App\Http\Controllers\ContactController;
 
 Route::get('/', [WisataController::class, 'index'])->name('home');
 
@@ -23,6 +24,11 @@ Route::put('/wisata/{id}', [WisataController::class, 'update'])->name('wisata.up
 Route::delete('/wisata/{id}', [WisataController::class, 'destroy'])->name('wisata.destroy');
 
 Route::get('/top-rate', [WisataController::class, 'topRated'])->name('wisata.toprate');
+
+Route::get('/contact', function () { return view('contact');})->name('contact');
+
+// Menangani form ketika disubmit
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 //Route::get('/wisata/{id}', [WisataController::class, 'show'])->name('wisata.show');
 

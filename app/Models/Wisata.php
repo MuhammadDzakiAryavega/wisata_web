@@ -30,4 +30,5 @@ class Wisata extends Model
     {
         return $this->belongsTo(Kabupaten::class);
     }
+
 }
