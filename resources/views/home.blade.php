@@ -90,7 +90,7 @@
         <h1 class="hero-title">SISTEM INFORMASI</h1>
         <h1 class="hero-title">WISATA SUMATRA BARAT</h1>
         <p class="hero-subtitle">Temukan tempat wisata terbaik untuk liburan Anda dengan pengalaman terbaik dari kami.</p>
-        <a href="/list" class="hero-button">Lihat Destinasi</a>
+        <a href="/form" class="hero-button">Lihat Destinasi</a>
     </div>
 </div>
 @endsection

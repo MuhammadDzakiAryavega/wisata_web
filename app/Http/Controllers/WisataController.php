@@ -127,4 +127,11 @@ class WisataController extends Controller
     return redirect()->route('wisata.list')->with('success', 'Data wisata berhasil dihapus!');
     }
 
+    public function topRated()
+    {
+    $topIds = [3, 5, 8, 10]; // ID yang dianggap top rated
+    $wisatas = Wisata::whereIn('id', $topIds)->get();
+    return view('top_rate', compact('wisatas'));
+    }
+
 }

@@ -22,6 +22,8 @@ Route::put('/wisata/{id}', [WisataController::class, 'update'])->name('wisata.up
 
 Route::delete('/wisata/{id}', [WisataController::class, 'destroy'])->name('wisata.destroy');
 
+Route::get('/top-rate', [WisataController::class, 'topRated'])->name('wisata.toprate');
+
 //Route::get('/wisata/{id}', [WisataController::class, 'show'])->name('wisata.show');
 
 //Route::get('/wisata/{id}/edit', [WisataController::class, 'edit'])->name('wisata.edit');
