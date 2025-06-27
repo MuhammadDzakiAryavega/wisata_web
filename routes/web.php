@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WisataController;
 use App\Http\Controllers\ContactController;
+use App\Http\Middleware\isAdmin;
 
 Route::get('/', [WisataController::class, 'index'])->name('home');
 
@@ -29,6 +30,10 @@ Route::get('/contact', function () { return view('contact');})->name('contact');
 
 // Menangani form ketika disubmit
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+Route::get('/dashboard', [WisataController::class, 'dashboard']);
+
+Route::get('/dashboard', function () {return view('admin.dashboard');})->middleware('is_admin');
 
 //Route::get('/wisata/{id}', [WisataController::class, 'show'])->name('wisata.show');
 

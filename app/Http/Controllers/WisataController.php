@@ -134,4 +134,11 @@ class WisataController extends Controller
     return view('top_rate', compact('wisatas'));
     }
 
+    public function dashboard()
+    {
+    $wisatas = Wisata::all();
+    return view('admin.dashboard', compact('wisatas'));
+    }
+
+
 }
