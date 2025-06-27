@@ -23,11 +23,12 @@
             height: 100vh;
             width: 60px;
             background-color: #2c5282;
-            transition: width 0.3s;
+            transition: width 0.4s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
             z-index: 1000;
+            overflow: hidden;
         }
 
         .sidebar.expanded {
@@ -55,12 +56,23 @@
             padding: 10px 0;
             color: white;
             text-decoration: none;
-            transition: background 0.2s;
+            transition: background 0.2s, padding 0.3s;
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: none;
         }
 
         .sidebar.expanded a.menu-item {
             justify-content: flex-start;
             padding-left: 15px;
+            animation: fadeSlideIn 0.4s forwards;
+        }
+
+        @keyframes fadeSlideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .sidebar a.menu-item:hover {
@@ -71,16 +83,17 @@
             color: white;
             margin-left: 10px;
             display: none;
+            white-space: nowrap;
         }
 
         .sidebar.expanded span {
-            display: inline;
+            display: inline-block;
         }
 
         .content {
             margin-left: 60px;
             width: calc(100% - 60px);
-            transition: margin-left 0.3s, width 0.3s;
+            transition: margin-left 0.3s ease, width 0.3s ease;
         }
 
         .sidebar.expanded ~ .content {
@@ -111,13 +124,29 @@
             text-align: center;
         }
 
+        .dashboard-overlay h1,
+        .dashboard-overlay p {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards;
+        }
+
         .dashboard-overlay h1 {
             font-size: 3rem;
             font-weight: bold;
+            animation-delay: 0.3s;
         }
 
         .dashboard-overlay p {
             font-size: 1.2rem;
+            animation-delay: 0.6s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
@@ -134,7 +163,7 @@
             <span>Data Wisata</span>
         </a>
 
-        <a href="{{ url('/wisata') }}" class="menu-item">
+        <a href="{{ url('/list_contact') }}" class="menu-item">
             <i class="fas fa-table"></i>
             <span>Data Masukan</span>
         </a>
@@ -163,7 +192,16 @@
 
     <script>
         function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('expanded');
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('expanded');
+
+            // Trigger reflow to restart animations
+            const items = sidebar.querySelectorAll('.menu-item');
+            items.forEach(item => {
+                item.style.animation = 'none';
+                void item.offsetWidth; // trigger reflow
+                item.style.animation = '';
+            });
         }
 
         function confirmLogout() {

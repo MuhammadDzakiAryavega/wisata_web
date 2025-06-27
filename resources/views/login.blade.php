@@ -17,22 +17,22 @@
         text-align: center;
         margin-bottom: 30px;
         font-weight: bold;
-        color: #2c5282;
+        color: #188a5c;
     }
 
     .form-label {
-        color: #2c5282;
+        color: #188a5c;
         font-weight: 500;
     }
 
     .btn-login {
-        background-color: #2c5282;
+        background-color: #188a5c;
         border: none;
         width: 100%;
     }
 
     .btn-login:hover {
-        background-color: #2b6cb0;
+        background-color: #188a5c;
     }
 
     .text-muted {
@@ -40,7 +40,7 @@
     }
 
     .form-check-label {
-        color: #2c5282;
+        color: #188a5c;
     }
 </style>
 

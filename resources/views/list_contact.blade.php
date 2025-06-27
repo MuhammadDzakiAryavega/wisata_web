@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Daftar Wisata</title>
+    <title>List Contact</title>
 
     <!-- Bootstrap dan Font Awesome -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -131,70 +131,49 @@
 {{-- Konten --}}
 <div class="content">
     <div class="container">
-        <h1 class="mb-4">Daftar Wisata</h1>
-
-        <div class="text-end mb-3">
-            <a href="{{ route('wisata.create') }}" class="btn btn-primary">
-                <i class="fas fa-plus-circle"></i> Tambah Wisata
-            </a>
-        </div>
+        <h1 class="mb-4">Daftar Pesan Masuk</h1>
 
         @if(session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
-        @if($wisatas->count())
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped table-sm">
-                <thead class="table-success">
-                    <tr>
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>Deskripsi</th>
-                        <th>Kabupaten</th>
-                        <th>Kecamatan</th>
-                        <th>Tahun</th>
-                        <th>Kategori</th>
-                        <th>Cover</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($wisatas as $wisata)
-                    <tr>
-                        <td>{{ $wisatas->firstItem() + $loop->index }}</td>
-                        <td>{{ $wisata->title }}</td>
-                        <td>{{ Str::limit($wisata->description, 100) }}</td>
-                        <td>{{ $wisata->kabupaten->kabupaten_name ?? '-' }}</td>
-                        <td>{{ $wisata->kecamatan }}</td>
-                        <td>{{ $wisata->year }}</td>
-                        <td>{{ $wisata->category->category_name ?? '-' }}</td>
-                        <td>
-                            @if(Str::startsWith($wisata->cover_image, 'http'))
-                                <img src="{{ $wisata->cover_image }}" width="80" class="img-thumbnail" alt="Cover">
-                            @else
-                                <img src="{{ asset('images/' . $wisata->cover_image) }}" width="80" class="img-thumbnail" alt="Cover">
-                            @endif
-                        </td>
-                        <td>
-                            <a href="{{ route('wisata.edit', $wisata->id) }}" class="btn btn-warning btn-sm mb-1">Edit</a>
-                            <form action="{{ route('wisata.destroy', $wisata->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                            </form>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-
-        <div class="mt-3">
-            {{ $wisatas->links('pagination::bootstrap-5') }}
-        </div>
+        @if($contacts->isEmpty())
+            <div class="alert alert-warning">Belum ada pesan yang masuk.</div>
         @else
-            <div class="alert alert-info">Belum ada data wisata.</div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-info">
+                        <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Email</th>
+                            <th>Subjek</th>
+                            <th>Pesan</th>
+                            <th>Tanggal</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($contacts as $index => $contact)
+                            <tr>
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ $contact->name }}</td>
+                                <td>{{ $contact->gmail }}</td>
+                                <td>{{ $contact->subject }}</td>
+                                <td>{{ $contact->message }}</td>
+                                <td>{{ $contact->created_at->format('d M Y, H:i') }}</td>
+                                <td>
+                                    <form action="{{ route('contact.destroy', $contact->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         @endif
     </div>
 </div>
