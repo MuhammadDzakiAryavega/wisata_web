@@ -55,37 +55,40 @@
             color: white;
             text-decoration: none;
             transition: background 0.2s, padding 0.3s;
-            opacity: 0;
-            transform: translateX(-20px);
-            animation: none;
-        }
-
-        .sidebar.expanded a.menu-item {
-            justify-content: flex-start;
-            padding-left: 15px;
-            animation: fadeSlideIn 0.4s forwards;
-        }
-
-        @keyframes fadeSlideIn {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
         }
 
         .sidebar a.menu-item:hover {
             background-color: #2b6cb0;
         }
 
-        .sidebar span {
+        .sidebar a.menu-item span {
             color: white;
             margin-left: 10px;
             display: none;
             white-space: nowrap;
         }
 
-        .sidebar.expanded span {
+        .sidebar.expanded a.menu-item {
+            justify-content: flex-start;
+            padding-left: 15px;
+        }
+
+        .sidebar.expanded a.menu-item span {
             display: inline-block;
+        }
+
+        .bottom-menu {
+            margin-top: auto;
+            margin-bottom: 20px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sidebar.expanded .bottom-menu {
+            align-items: flex-start;
+            padding-left: 15px;
         }
 
         .content {
@@ -101,12 +104,13 @@
 </head>
 <body>
 
-{{-- Sidebar --}}
+<!-- Sidebar -->
 <div class="sidebar" id="sidebar">
     <div class="toggle-btn" onclick="toggleSidebar()">
         <i class="fas fa-bars"></i>
     </div>
 
+    <!-- Menu Utama -->
     <a href="{{ url('/list') }}" class="menu-item">
         <i class="fas fa-th-large"></i>
         <span>Data Wisata</span>
@@ -117,18 +121,26 @@
         <span>Data Masukan</span>
     </a>
 
-    <a href="#" class="menu-item mt-auto mb-4" onclick="event.preventDefault(); confirmLogout();">
-        <i class="fas fa-sign-out-alt"></i>
-        <span>Logout</span>
-    </a>
+    <!-- Menu Bawah -->
+    <div class="bottom-menu">
+        <a href="{{ url('/dashboard') }}" class="menu-item mb-2">
+            <i class="fas fa-arrow-left"></i>
+            <span>Back Dashboard</span>
+        </a>
 
-    {{-- Logout form --}}
+        <a href="#" class="menu-item" onclick="event.preventDefault(); confirmLogout();">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+        </a>
+    </div>
+
+    <!-- Logout form -->
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
         @csrf
     </form>
 </div>
 
-{{-- Konten --}}
+<!-- Konten -->
 <div class="content">
     <div class="container">
         <h1 class="mb-4">Daftar Wisata</h1>
@@ -171,9 +183,9 @@
                         <td>{{ $wisata->category->category_name ?? '-' }}</td>
                         <td>
                             @if(Str::startsWith($wisata->cover_image, 'http'))
-                                <img src="{{ $wisata->cover_image }}" width="80" class="img-thumbnail" alt="Cover">
+                                <img src="{{ $wisata->cover_image }}" width="230" class="img-thumbnail" alt="Cover">
                             @else
-                                <img src="{{ asset('images/' . $wisata->cover_image) }}" width="80" class="img-thumbnail" alt="Cover">
+                                <img src="{{ asset('images/' . $wisata->cover_image) }}" width="230" class="img-thumbnail" alt="Cover">
                             @endif
                         </td>
                         <td>
@@ -199,17 +211,11 @@
     </div>
 </div>
 
+<!-- Script Sidebar -->
 <script>
     function toggleSidebar() {
         const sidebar = document.getElementById('sidebar');
         sidebar.classList.toggle('expanded');
-
-        const items = sidebar.querySelectorAll('.menu-item');
-        items.forEach(item => {
-            item.style.animation = 'none';
-            void item.offsetWidth;
-            item.style.animation = '';
-        });
     }
 
     function confirmLogout() {

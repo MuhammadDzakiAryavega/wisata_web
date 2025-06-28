@@ -6,7 +6,6 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
@@ -57,37 +56,40 @@
             color: white;
             text-decoration: none;
             transition: background 0.2s, padding 0.3s;
-            opacity: 0;
-            transform: translateX(-20px);
-            animation: none;
-        }
-
-        .sidebar.expanded a.menu-item {
-            justify-content: flex-start;
-            padding-left: 15px;
-            animation: fadeSlideIn 0.4s forwards;
-        }
-
-        @keyframes fadeSlideIn {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
         }
 
         .sidebar a.menu-item:hover {
             background-color: #2b6cb0;
         }
 
-        .sidebar span {
+        .sidebar a.menu-item span {
             color: white;
             margin-left: 10px;
             display: none;
             white-space: nowrap;
         }
 
-        .sidebar.expanded span {
+        .sidebar.expanded a.menu-item {
+            justify-content: flex-start;
+            padding-left: 15px;
+        }
+
+        .sidebar.expanded a.menu-item span {
             display: inline-block;
+        }
+
+        .bottom-menu {
+            margin-top: auto;
+            margin-bottom: 20px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sidebar.expanded .bottom-menu {
+            align-items: flex-start;
+            padding-left: 15px;
         }
 
         .content {
@@ -152,12 +154,13 @@
 </head>
 <body>
 
-    {{-- Sidebar --}}
+    <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <div class="toggle-btn" onclick="toggleSidebar()">
             <i class="fas fa-bars"></i>
         </div>
 
+        <!-- Menu utama -->
         <a href="/list" class="menu-item">
             <i class="fas fa-th-large"></i>
             <span>Data Wisata</span>
@@ -168,18 +171,26 @@
             <span>Data Masukan</span>
         </a>
 
-        <a href="#" class="menu-item mt-auto mb-4" onclick="event.preventDefault(); confirmLogout();">
-            <i class="fas fa-sign-out-alt"></i>
-            <span>Logout</span>
-        </a>
+        <!-- Menu bawah -->
+        <div class="bottom-menu">
+            <a href="{{ url('/dashboard') }}" class="menu-item mb-2">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back Dashboard</span>
+            </a>
 
-        {{-- Form logout tersembunyi --}}
+            <a href="#" class="menu-item" onclick="event.preventDefault(); confirmLogout();">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+
+        <!-- Form logout tersembunyi -->
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf
         </form>
     </div>
 
-    {{-- Konten Utama --}}
+    <!-- Konten Utama -->
     <div class="content">
         <div class="dashboard-wrapper">
             <img src="{{ asset('images/dashboard2.jpg') }}" alt="Dashboard Image" class="dashboard-image">
@@ -190,18 +201,11 @@
         </div>
     </div>
 
+    <!-- Script -->
     <script>
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('expanded');
-
-            // Trigger reflow to restart animations
-            const items = sidebar.querySelectorAll('.menu-item');
-            items.forEach(item => {
-                item.style.animation = 'none';
-                void item.offsetWidth; // trigger reflow
-                item.style.animation = '';
-            });
         }
 
         function confirmLogout() {

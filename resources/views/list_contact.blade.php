@@ -55,37 +55,40 @@
             color: white;
             text-decoration: none;
             transition: background 0.2s, padding 0.3s;
-            opacity: 0;
-            transform: translateX(-20px);
-            animation: none;
-        }
-
-        .sidebar.expanded a.menu-item {
-            justify-content: flex-start;
-            padding-left: 15px;
-            animation: fadeSlideIn 0.4s forwards;
-        }
-
-        @keyframes fadeSlideIn {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
         }
 
         .sidebar a.menu-item:hover {
             background-color: #2b6cb0;
         }
 
-        .sidebar span {
+        .sidebar a.menu-item span {
             color: white;
             margin-left: 10px;
             display: none;
             white-space: nowrap;
         }
 
-        .sidebar.expanded span {
+        .sidebar.expanded a.menu-item {
+            justify-content: flex-start;
+            padding-left: 15px;
+        }
+
+        .sidebar.expanded a.menu-item span {
             display: inline-block;
+        }
+
+        .bottom-menu {
+            margin-top: auto;
+            margin-bottom: 20px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sidebar.expanded .bottom-menu {
+            align-items: flex-start;
+            padding-left: 15px;
         }
 
         .content {
@@ -107,6 +110,7 @@
         <i class="fas fa-bars"></i>
     </div>
 
+    <!-- Menu utama -->
     <a href="{{ url('/list') }}" class="menu-item">
         <i class="fas fa-th-large"></i>
         <span>Data Wisata</span>
@@ -117,10 +121,18 @@
         <span>Data Masukan</span>
     </a>
 
-    <a href="#" class="menu-item mt-auto mb-4" onclick="event.preventDefault(); confirmLogout();">
-        <i class="fas fa-sign-out-alt"></i>
-        <span>Logout</span>
-    </a>
+    <!-- Menu bawah -->
+    <div class="bottom-menu">
+        <a href="{{ url('/dashboard') }}" class="menu-item mb-2">
+            <i class="fas fa-arrow-left"></i>
+            <span>Back Dashboard</span>
+        </a>
+
+        <a href="#" class="menu-item" onclick="event.preventDefault(); confirmLogout();">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+        </a>
+    </div>
 
     {{-- Logout form --}}
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -182,13 +194,6 @@
     function toggleSidebar() {
         const sidebar = document.getElementById('sidebar');
         sidebar.classList.toggle('expanded');
-
-        const items = sidebar.querySelectorAll('.menu-item');
-        items.forEach(item => {
-            item.style.animation = 'none';
-            void item.offsetWidth;
-            item.style.animation = '';
-        });
     }
 
     function confirmLogout() {

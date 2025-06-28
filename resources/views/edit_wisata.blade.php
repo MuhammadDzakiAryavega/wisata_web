@@ -86,7 +86,7 @@
                 </div>
 
                 <div class="d-flex justify-content-between">
-                    <a href="{{ url('/wisata') }}" class="btn btn-secondary">Kembali</a>
+                    <a href="{{ url('/list') }}" class="btn btn-secondary">Kembali</a>
                     <button type="submit" class="btn btn-warning">Update</button>
                 </div>
             </form>

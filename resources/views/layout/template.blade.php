@@ -104,12 +104,13 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarContent">
+        <!-- Menu kiri -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
           <li class="nav-item"><a class="nav-link active" href="/form">Destination</a></li>
           <li class="nav-item"><a class="nav-link active" href="/top-rate">Top Rate</a></li>
           <li class="nav-item"><a class="nav-link active" href="/contact">Contact</a></li>
-          {{--<li class="nav-item"><a class="nav-link active" href="/dashboard">Dashboard</a></li>--}}
+          {{-- <li class="nav-item"><a class="nav-link active" href="/dashboard">Dashboard</a></li> --}}
         </ul>
 
         <!-- Search -->
@@ -120,17 +121,13 @@
 
         <!-- Auth -->
         @auth
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link disabled text-white">{{ Auth::user()->name }}</a>
-          </li>
-          <li class="nav-item">
-            <form action="{{ route('logout') }}" method="POST" onsubmit="return confirm('Yakin ingin logout?')">
-              @csrf
-              <button type="submit" class="nav-link btn btn-link text-white p-0" style="text-decoration: none;">Logout</button>
-            </form>
-          </li>
-        </ul>
+        <div class="d-flex align-items-center">
+          <span class="text-white me-3">{{ Auth::user()->name }}</span>
+          <form action="{{ route('logout') }}" method="POST" onsubmit="return confirm('Yakin ingin logout?')">
+            @csrf
+            <button type="submit" class="btn btn-outline-light btn-sm">Logout</button>
+          </form>
+        </div>
         @else
         <ul class="navbar-nav">
           <li class="nav-item">
