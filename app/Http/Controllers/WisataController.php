@@ -104,7 +104,7 @@ class WisataController extends Controller
         }
 
         $wisata->update($data);
-        return redirect()->route('wisata.edit', $id)->with('success', 'Data wisata berhasil diperbarui!');
+        return redirect('/list')->with('success', 'Data wisata berhasil diperbarui!');
     }
 
     public function destroy($id)
