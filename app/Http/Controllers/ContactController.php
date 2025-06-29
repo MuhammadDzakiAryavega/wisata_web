@@ -33,7 +33,7 @@ class ContactController extends Controller
     $contact = Contact::findOrFail($id);
     $contact->delete();
 
-    return redirect()->route('list_contact')->with('success', 'Pesan berhasil dihapus.');
+    return redirect()->route('contact.index')->with('success', 'Pesan berhasil dihapus.');
     }
 
 }

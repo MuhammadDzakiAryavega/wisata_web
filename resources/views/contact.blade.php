@@ -180,7 +180,7 @@
           <i class="fas fa-map-marker-alt"></i>
           <div>
             <h3>Address</h3>
-            <p>Jl. Jagabaya, Kubu Dalam Parak Karakah, Kec. Padang Tim., Kota Padang, Sumatera Barat 25147</p>
+            <p>Jl. Jagabaya, Kubu Dalam Parak Karakah, Kec. Padang Timur, Kota Padang, Sumatera Barat 25147</p>
           </div>
         </div>
 
