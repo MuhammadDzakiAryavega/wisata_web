@@ -3,12 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Tambah Wisata</title>
-
-    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome (optional) -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -18,7 +14,6 @@
     </style>
 </head>
 <body>
-
 <div class="container">
     <div class="mb-4">
         <h3 class="text-center">Tambah Wisata Baru</h3>
@@ -41,13 +36,13 @@
 
                 <div class="mb-3">
                     <label for="title" class="form-label">Nama Wisata</label>
-                    <input type="text" class="form-control" id="title" name="title" required>
+                    <input type="text" class="form-control" name="title" required>
                 </div>
 
                 <div class="mb-3">
                     <label for="kabupaten_id" class="form-label">Kabupaten</label>
                     <select class="form-select" name="kabupaten_id" required>
-                        <option value="" disabled selected>Pilih Kabupaten</option>
+                        <option disabled selected>Pilih Kabupaten</option>
                         @foreach ($kabupatens as $kabupaten)
                             <option value="{{ $kabupaten->id }}">{{ $kabupaten->kabupaten_name }}</option>
                         @endforeach
@@ -56,18 +51,18 @@
 
                 <div class="mb-3">
                     <label for="kecamatan" class="form-label">Kecamatan</label>
-                    <input type="text" class="form-control" id="kecamatan" name="kecamatan" required>
+                    <input type="text" class="form-control" name="kecamatan" required>
                 </div>
 
                 <div class="mb-3">
                     <label for="description" class="form-label">Deskripsi</label>
-                    <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                    <textarea class="form-control" name="description" rows="3" required></textarea>
                 </div>
 
                 <div class="mb-3">
                     <label for="category_id" class="form-label">Kategori</label>
                     <select class="form-select" name="category_id" required>
-                        <option value="" disabled selected>Pilih Kategori</option>
+                        <option disabled selected>Pilih Kategori</option>
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->category_name }}</option>
                         @endforeach
@@ -76,8 +71,8 @@
 
                 <div class="mb-3">
                     <label for="year" class="form-label">Tahun Dibuat</label>
-                    <select name="year" class="form-select" required>
-                        <option value="" disabled selected>Pilih Tahun</option>
+                    <select class="form-select" name="year" required>
+                        <option disabled selected>Pilih Tahun</option>
                         @for ($i = date('Y'); $i >= 1900; $i--)
                             <option value="{{ $i }}">{{ $i }}</option>
                         @endfor
@@ -90,16 +85,13 @@
                 </div>
 
                 <div class="d-flex justify-content-between">
-                    <a href="{{ url('/list') }}" class="btn btn-secondary">Kembali</a>
+                    <a href="{{ route('wisata.list') }}" class="btn btn-secondary">Kembali</a>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
-
             </form>
         </div>
     </div>
 </div>
-
-<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
