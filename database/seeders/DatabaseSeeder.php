@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         //$this->call(CategorySeeder::class);
         // Buat data dummy lainnya
         //Wisata::factory()->count(30)->create();
-        $this->call(ContactSeeder::class);
+        //$this->call(ContactSeeder::class);
         //$this->call(KabupatenSeeder::class);
         // User::factory(5)->create();
     }

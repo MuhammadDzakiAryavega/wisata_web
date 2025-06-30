@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Daftar User</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -96,6 +96,7 @@
             margin-left: 60px;
             width: calc(100% - 60px);
             transition: margin-left 0.3s ease, width 0.3s ease;
+            padding: 30px;
         }
 
         .sidebar.expanded ~ .content {
@@ -103,52 +104,11 @@
             width: calc(100% - 200px);
         }
 
-        .dashboard-wrapper {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        .dashboard-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.6);
-        }
-
-        .dashboard-overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            text-align: center;
-        }
-
-        .dashboard-overlay h1,
-        .dashboard-overlay p {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s forwards;
-        }
-
-        .dashboard-overlay h1 {
-            font-size: 3rem;
-            font-weight: bold;
-            animation-delay: 0.3s;
-        }
-
-        .dashboard-overlay p {
-            font-size: 1.2rem;
-            animation-delay: 0.6s;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
     </style>
 </head>
@@ -160,7 +120,6 @@
             <i class="fas fa-bars"></i>
         </div>
 
-        <!-- Menu utama -->
         <a href="/list" class="menu-item">
             <i class="fas fa-th-large"></i>
             <span>Data Wisata</span>
@@ -176,33 +135,53 @@
             <span>Data User</span>
         </a>
 
-        <!-- Menu bawah -->
         <div class="bottom-menu">
-
+            <a href="{{ url('/dashboard') }}" class="menu-item mb-2">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back Dashboard</span>
+            </a>
+            
             <a href="#" class="menu-item" onclick="event.preventDefault(); confirmLogout();">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>Logout</span>
             </a>
         </div>
 
-        <!-- Form logout tersembunyi -->
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf
         </form>
     </div>
 
-    <!-- Konten Utama -->
+    <!-- Konten -->
     <div class="content">
-        <div class="dashboard-wrapper">
-            <img src="{{ asset('images/dashboard2.jpg') }}" alt="Dashboard Image" class="dashboard-image">
-            <div class="dashboard-overlay">
-                <h1>Selamat Datang di halaman Dashboard</h1>
-                <p>Kelola data wisata Anda dengan mudah dan efisien.</p>
-            </div>
+        <h2 class="mb-4">Daftar User</h2>
+
+        <div class="table-container">
+            <table class="table table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nama</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($users as $user)
+                    <tr>
+                        <td>{{ $user->id }}</td>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->password }}</td>
+                        <td>{{ $user->role }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 
-    <!-- Script -->
     <script>
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
@@ -215,6 +194,5 @@
             }
         }
     </script>
-
 </body>
 </html>

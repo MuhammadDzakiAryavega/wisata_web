@@ -7,11 +7,9 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\WisataController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AuthController;
-use App\Http\Middleware\IsAdmin; 
+use App\Http\Middleware\IsAdmin;
 
-/*ollers\ContactController;
-use App\Http\Controllers\AuthController;
-use App\Http\Middl
+/*
 |--------------------------------------------------------------------------
 | Public Routes
 |--------------------------------------------------------------------------
@@ -44,9 +42,10 @@ Route::delete('/contact/{id}', [ContactController::class, 'destroy'])->name('con
 
 /*
 |--------------------------------------------------------------------------
-| Authentication Routes (Manual)
+| Authentication Routes
 |--------------------------------------------------------------------------
 */
+Route::get('/users', [AuthController::class, 'listUser'])->name('user.list');
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -59,19 +58,11 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.st
 | Email Verification Routes
 |--------------------------------------------------------------------------
 */
-
-// Menampilkan halaman permintaan verifikasi
-Route::get('/email/verify', function () {
-    return view('auth.verify-email');
-})->middleware('auth')->name('verification.notice');
-
-// Memproses link verifikasi dari email
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
     return redirect('/dashboard');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
-// Kirim ulang link verifikasi
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
     return back()->with('message', 'Link verifikasi baru sudah dikirim!');

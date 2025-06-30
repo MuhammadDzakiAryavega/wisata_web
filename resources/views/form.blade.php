@@ -36,6 +36,13 @@
 </style>
 
 <div class="container mt-4">
+    {{-- Tampilkan pesan jika ada session message --}}
+    @if (session('message'))
+       <div class="alert alert-danger">
+          {{ session('message') }}
+       </div>
+    @endif
+
     <h1 class="mb-4">Daftar Wisata</h1>
 
     @if ($wisatas->isEmpty())
@@ -66,4 +73,5 @@
         </div>
     @endif
 </div>
+
 @endsection

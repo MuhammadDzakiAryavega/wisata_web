@@ -121,6 +121,11 @@
         <span>Data Masukan</span>
     </a>
 
+    <a href="{{ url('/users') }}" class="menu-item">
+        <i class="fas fa-users"></i>
+        <span>Data User</span>
+    </a>
+
     <!-- Menu Bawah -->
     <div class="bottom-menu">
         <a href="{{ url('/dashboard') }}" class="menu-item mb-2">

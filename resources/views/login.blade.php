@@ -61,19 +61,29 @@
     <div class="login-container">
         <h3 class="login-title">Login Akun Anda</h3>
 
-        @if(session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
+        {{-- Pesan dari session --}}
+        @if (session('message'))
+            <div class="alert alert-warning">
+                {{ session('message') }}
+            </div>
         @endif
 
-        @if(session('error'))
+        @if (session('error'))
             <div class="alert alert-danger">
                 {{ session('error') }}
+
                 @if (session('error') === 'Email Anda belum diverifikasi. Silakan cek email Anda.')
                     <form method="POST" action="{{ route('verification.send') }}">
                         @csrf
                         <button type="submit" class="btn btn-link p-0">Kirim ulang email verifikasi</button>
                     </form>
                 @endif
+            </div>
+        @endif
+
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
             </div>
         @endif
 

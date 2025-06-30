@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Kabupaten;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
 
 class WisataController extends Controller
 {
@@ -19,8 +20,12 @@ class WisataController extends Controller
 
     public function form()
     {
-        $wisatas = Wisata::all();
-        return view('form', compact('wisatas'));
+    if (!Auth::check()) {
+        return redirect()->route('login.form')->with('message', 'Anda Harus Login Terlebih dahulu jika anda ingin melihat Destination!!');
+    }
+
+    $wisatas = Wisata::all();
+    return view('form', compact('wisatas'));
     }
 
     public function create()
@@ -121,6 +126,10 @@ class WisataController extends Controller
 
     public function topRated()
     {
+        if (!Auth::check()) {
+            return redirect()->route('login.form')->with('message', 'Anda harus Login terlebih dahulu jika ingin melihat Top rate!!');
+        }
+
         $topIds = [3, 5, 8, 10];
         $wisatas = Wisata::whereIn('id', $topIds)->get();
         return view('top_rate', compact('wisatas'));

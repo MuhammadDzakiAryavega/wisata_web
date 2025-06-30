@@ -58,5 +58,9 @@ class Kernel extends HttpKernel
 
         // Custom middleware
         'is_admin' => \App\Http\Middleware\IsAdmin::class, // ← ini middleware untuk admin
+        'require.login' => \App\Http\Middleware\RequireLoginMessage::class,
+        'login.message' => \App\Http\Middleware\RequireLoginMessage::class,
     ];
+
+    
 }

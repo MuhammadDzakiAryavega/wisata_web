@@ -72,4 +72,10 @@ class AuthController extends Controller
 
         return redirect()->route('login.form');
     }
+
+    public function listUser()
+    {
+        $users = User::all();
+        return view('list_user', compact('users'));
+    }
 }
