@@ -9,13 +9,17 @@ use App\Models\Kabupaten;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class WisataController extends Controller
 {
     public function index()
     {
+
         $wisatas = Wisata::all();
         return view('home', compact('wisatas'));
+        //$wisatas = Wisata::all();
+        
     }
 
     public function form()
@@ -24,7 +28,11 @@ class WisataController extends Controller
         return redirect()->route('login.form')->with('message', 'Anda Harus Login Terlebih dahulu jika anda ingin melihat Destination!!');
     }
 
-    $wisatas = Wisata::all();
+    $query=Wisata::orderBy('id', 'asc');
+    if (request('q')) {
+        $query->where('title', 'like', '%'. request('q') . '%');
+    }
+    $wisatas=$query->paginate(100)->withQueryString();
     return view('form', compact('wisatas'));
     }
 

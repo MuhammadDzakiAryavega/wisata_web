@@ -188,7 +188,7 @@
           <i class="fas fa-phone-alt"></i>
           <div>
             <h3>Call Us</h3>
-            <p>(0834) 983492</p>
+            <p>(+62) 82178343001</p>
           </div>
         </div>
 
@@ -196,7 +196,7 @@
           <i class="fas fa-envelope"></i>
           <div>
             <h3>Email Us</h3>
-            <p>aryasajaa@gmail.com</p>
+            <p>m.dzaky3105@gmail.com</p>
           </div>
         </div>
       </div>
@@ -221,11 +221,14 @@
           @csrf
           <div class="row gy-4">
             <div class="col-md-6">
-              <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+              <input type="text" name="name" class="form-control" placeholder="Your Name" 
+              value="{{ Auth::check() ? Auth::user()->name : '' }}" required>
             </div>
 
+
             <div class="col-md-6">
-              <input type="email" name="gmail" class="form-control" placeholder="Your Email" required>
+              <input type="email" name="gmail" class="form-control" placeholder="Your Email" 
+              value="{{ Auth::check() ? Auth::user()->email : '' }}" required>
             </div>
 
             <div class="col-md-12">

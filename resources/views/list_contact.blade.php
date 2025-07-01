@@ -100,17 +100,6 @@
         .sidebar.expanded ~ .content {
             margin-left: 200px;
         }
-
-        thead th {
-            background-color: #d4f1d4 !important;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        tbody td {
-            text-align: center;
-            vertical-align: middle;
-        }
     </style>
 </head>
 <body>
@@ -134,7 +123,7 @@
 
     <a href="{{ url('/users') }}" class="menu-item">
         <i class="fas fa-users"></i>
-        <span>Data User</span>
+            <span>Data User</span>
     </a>
 
     <!-- Menu bawah -->
@@ -170,7 +159,7 @@
         @else
             <div class="table-responsive">
                 <table class="table table-bordered table-striped table-sm">
-                    <thead>
+                    <thead class="table-info">
                         <tr>
                             <th>No</th>
                             <th>Nama</th>

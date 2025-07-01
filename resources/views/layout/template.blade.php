@@ -114,8 +114,8 @@
         </ul>
 
         <!-- Search -->
-        <form class="d-flex me-3" role="search" action="{{ url('/') }}" method="GET">
-          <input class="form-control me-2" type="search" name="search" placeholder="Search" />
+        <form class="d-flex me-3" role="search" action="{{ url('/form') }}" method="GET">
+          <input class="form-control me-2" type="search" name="q" placeholder="Search" />
           <button class="btn btn-outline-light" type="submit"><i class="fas fa-search"></i></button>
         </form>
 

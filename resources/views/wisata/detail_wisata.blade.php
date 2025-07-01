@@ -9,7 +9,7 @@
             {{-- Gambar di sebelah kiri --}}
             <div class="col-md-5">
                 @if ($wisata->cover_image)
-                    <img src="{{ asset('images/' . $wisata->cover_image) }}" class="img-fluid rounded-start" alt="{{ $wisata->title }}">
+                    <img src="{{ asset('images/' . $wisata->cover_image) }}" class="w-100 h-100 img-fluid rounded-start object-fit-cover" alt="{{ $wisata->title }}">
                 @else
                     <img src="https://via.placeholder.com/400x300" class="img-fluid rounded-start" alt="Tidak ada gambar">
                 @endif
