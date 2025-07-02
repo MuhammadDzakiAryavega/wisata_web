@@ -128,6 +128,11 @@
 
     <!-- Menu Bawah -->
     <div class="bottom-menu">
+        <a href="/" class="menu-item mb-2">
+            <i class="fas fa-arrow-left"></i>
+            <span>Lihat Web</span>
+        </a>
+
         <a href="{{ url('/dashboard') }}" class="menu-item mb-2">
             <i class="fas fa-arrow-left"></i>
             <span>Back Dashboard</span>

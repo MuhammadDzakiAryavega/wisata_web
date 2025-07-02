@@ -136,6 +136,11 @@
         </a>
 
         <div class="bottom-menu">
+            <a href="/" class="menu-item mb-2">
+                <i class="fas fa-arrow-left"></i>
+                <span>Lihat Web</span>
+            </a>
+            
             <a href="{{ url('/dashboard') }}" class="menu-item mb-2">
                 <i class="fas fa-arrow-left"></i>
                 <span>Back Dashboard</span>
@@ -165,6 +170,8 @@
                         <th>Email</th>
                         <th>Password</th>
                         <th>Role</th>
+                        <th>Create</th>
+                        <th>Update</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -175,6 +182,8 @@
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->password }}</td>
                         <td>{{ $user->role }}</td>
+                        <td>{{ $user->created_at }}</td>
+                        <td>{{ $user->updated_at }}</td>
                     </tr>
                     @endforeach
                 </tbody>
