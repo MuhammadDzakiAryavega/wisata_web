@@ -129,14 +129,14 @@
     <!-- Menu bawah -->
     <div class="bottom-menu">
         <a href="/" class="menu-item mb-2">
-            <i class="fas fa-arrow-left"></i>
-            <span>Lihat Web</span>
-        </a>
+                <i class="fas fa-home"></i>
+                <span>Lihat Web</span>
+            </a>
 
-        <a href="{{ url('/dashboard') }}" class="menu-item mb-2">
-            <i class="fas fa-arrow-left"></i>
-            <span>Back Dashboard</span>
-        </a>
+            <a href="{{ url('/dashboard') }}" class="menu-item mb-2">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Back Dashboard</span>
+            </a>
 
         <a href="#" class="menu-item" onclick="event.preventDefault(); confirmLogout();">
             <i class="fas fa-sign-out-alt"></i>

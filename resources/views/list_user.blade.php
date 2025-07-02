@@ -137,12 +137,12 @@
 
         <div class="bottom-menu">
             <a href="/" class="menu-item mb-2">
-                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-home"></i>
                 <span>Lihat Web</span>
             </a>
-            
+
             <a href="{{ url('/dashboard') }}" class="menu-item mb-2">
-                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-tachometer-alt"></i>
                 <span>Back Dashboard</span>
             </a>
             
