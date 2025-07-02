@@ -8,7 +8,7 @@
 .hero-section {
     position: relative;
     background: url('/images/icons.jpg') no-repeat center center/cover;
-    min-height: 100vh;
+    min-height: 90vh;
     width: 100%;
     color: white;
     overflow: hidden;

@@ -108,9 +108,9 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
           <li class="nav-item"><a class="nav-link active" href="/form">Destination</a></li>
-          <li class="nav-item"><a class="nav-link active" href="/top-rate">Top Rate</a></li>
+          <li class="nav-item"><a class="nav-link active" href="/top-rate">Favorit</a></li>
           <li class="nav-item"><a class="nav-link active" href="/contact">Contact</a></li>
-          {{-- <li class="nav-item"><a class="nav-link active" href="/dashboard">Dashboard</a></li> --}}
+          <li class="nav-item"><a class="nav-link active" href="/dashboard">Dashboard</a></li>
         </ul>
 
         <!-- Search -->

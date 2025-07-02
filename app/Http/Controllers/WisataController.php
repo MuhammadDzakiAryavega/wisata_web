@@ -135,10 +135,10 @@ class WisataController extends Controller
     public function topRated()
     {
         if (!Auth::check()) {
-            return redirect()->route('login.form')->with('message', 'Anda harus Login terlebih dahulu jika ingin melihat Top rate!!');
+            return redirect()->route('login.form')->with('message', 'Anda harus Login terlebih dahulu jika ingin melihat Favorit!!');
         }
 
-        $topIds = [3, 5, 8, 10];
+        $topIds = [2, 7, 11];
         $wisatas = Wisata::whereIn('id', $topIds)->get();
         return view('top_rate', compact('wisatas'));
     }

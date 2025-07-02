@@ -38,7 +38,7 @@
 </style>
 
 <div class="container mt-4">
-    <h1 class="mb-4">Wisata Populer</h1>
+    <h1 class="mb-4">Wisata Favorit</h1>
 
     @if ($wisatas->isEmpty())
         <div class="alert alert-warning">
