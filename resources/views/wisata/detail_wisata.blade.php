@@ -8,6 +8,8 @@
         border-radius: 16px;
         overflow: hidden;
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        max-width: 1000px;
+        margin: auto;
     }
 
     .img-left {
@@ -41,6 +43,12 @@
         font-weight: 500;
     }
 
+    .star-rating {
+        color: #ffc107;
+        font-size: 1.2rem;
+        margin-bottom: 16px;
+    }
+
     @media (max-width: 768px) {
         .img-left {
             border-radius: 16px 16px 0 0;
@@ -53,7 +61,7 @@
     }
 </style>
 
-<div class="container mt-5">
+<div class="d-flex justify-content-center align-items-center" style="min-height: calc(100vh - 100px); padding-top: 50px; padding-bottom: 40px;">
     <div class="card card-custom">
         <div class="row g-0">
             {{-- Gambar kiri --}}
@@ -68,7 +76,7 @@
             {{-- Informasi kanan --}}
             <div class="col-md-6">
                 <div class="card-body card-body-custom">
-                    <h3 class="mb-4">{{ $wisata->title }}</h3>
+                    <h3 class="mb-3">{{ $wisata->title }}</h3>
 
                     <div>
                         <div class="info-label">Kabupaten:</div>

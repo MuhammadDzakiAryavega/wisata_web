@@ -27,7 +27,6 @@ class WisataController extends Controller
     if (!Auth::check()) {
         return redirect()->route('login.form')->with('message', 'Anda Harus Login Terlebih dahulu jika anda ingin melihat Destination!!');
     }
-
     $query=Wisata::orderBy('id', 'asc');
     if (request('q')) {
         $query->where('title', 'like', '%'. request('q') . '%');
@@ -52,10 +51,11 @@ class WisataController extends Controller
             'description' => 'required|string',
             'year' => 'required|numeric',
             'category_id' => 'required|numeric',
+            'rating' => 'required|numeric|min:0|max:5',
             'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $data = $request->only(['title', 'kabupaten_id', 'kecamatan', 'description', 'year', 'category_id']);
+        $data = $request->only(['title', 'kabupaten_id', 'kecamatan', 'description', 'year', 'rating', 'category_id']);
         $data['slug'] = Str::slug($request->title);
 
         if ($request->hasFile('cover_image')) {
@@ -98,11 +98,12 @@ class WisataController extends Controller
             'description' => 'required|string',
             'year' => 'required|numeric',
             'category_id' => 'required|numeric',
+            'rating' => 'required|numeric|min:0|max:5',
             'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $wisata = Wisata::findOrFail($id);
-        $data = $request->only(['title', 'kabupaten_id', 'kecamatan', 'description', 'year', 'category_id']);
+        $data = $request->only(['title', 'kabupaten_id', 'kecamatan', 'description', 'year', 'rating', 'category_id']);
         $data['slug'] = Str::slug($request->title);
 
         if ($request->hasFile('cover_image')) {
@@ -134,14 +135,21 @@ class WisataController extends Controller
 
     public function topRated()
     {
-        if (!Auth::check()) {
-            return redirect()->route('login.form')->with('message', 'Anda harus Login terlebih dahulu jika ingin melihat Favorit!!');
-        }
-
-        $topIds = [2, 7, 11];
-        $wisatas = Wisata::whereIn('id', $topIds)->get();
-        return view('top_rate', compact('wisatas'));
+    if (!Auth::check()) {
+        return redirect()->route('login.form')->with('message', 'Anda harus Login terlebih dahulu jika ingin melihat Favorit!!');
     }
+
+    $query = Wisata::orderBy('rating', 'desc'); // urutkan berdasarkan rating tertinggi
+
+    if (request('q')) {
+        $query->where('title', 'like', '%' . request('q') . '%'); // pencarian berdasarkan judul
+    }
+
+    $wisatas = $query->paginate(100)->withQueryString(); // tampilkan dengan pagination
+
+    return view('top_rate', compact('wisatas'));
+    }
+
 
     public function dashboard()
     {

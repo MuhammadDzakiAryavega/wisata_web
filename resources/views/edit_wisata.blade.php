@@ -115,6 +115,15 @@
                         </select>
                     </div>
 
+                    <!-- Kolom Rating -->
+                    <div class="col-md-6">
+                        <label class="form-label">Rating</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-star"></i></span>
+                            <input type="number" class="form-control" name="rating" step="0.1" min="0" max="5" value="{{ $wisata->rating }}" required>
+                        </div>
+                    </div>
+
                     <div class="col-md-6">
                         <label class="form-label">Gambar Saat Ini</label><br>
                         @if($wisata->cover_image)

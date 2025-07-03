@@ -18,6 +18,7 @@ class Wisata extends Model
         'description',
         'category_id',
         'year',
+        'rating',
         'cover_image',
     ];
 

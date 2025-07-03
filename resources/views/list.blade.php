@@ -110,7 +110,6 @@
         <i class="fas fa-bars"></i>
     </div>
 
-    <!-- Menu Utama -->
     <a href="{{ url('/list') }}" class="menu-item">
         <i class="fas fa-th-large"></i>
         <span>Data Wisata</span>
@@ -126,17 +125,16 @@
         <span>Data User</span>
     </a>
 
-    <!-- Menu Bawah -->
     <div class="bottom-menu">
         <a href="/" class="menu-item mb-2">
-                <i class="fas fa-home"></i>
-                <span>Lihat Web</span>
-            </a>
+            <i class="fas fa-home"></i>
+            <span>Lihat Web</span>
+        </a>
 
-            <a href="{{ url('/dashboard') }}" class="menu-item mb-2">
-                <i class="fas fa-tachometer-alt"></i>
-                <span>Back Dashboard</span>
-            </a>
+        <a href="{{ url('/dashboard') }}" class="menu-item mb-2">
+            <i class="fas fa-tachometer-alt"></i>
+            <span>Back Dashboard</span>
+        </a>
 
         <a href="#" class="menu-item" onclick="event.preventDefault(); confirmLogout();">
             <i class="fas fa-sign-out-alt"></i>
@@ -144,7 +142,6 @@
         </a>
     </div>
 
-    <!-- Logout form -->
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
         @csrf
     </form>
@@ -177,6 +174,7 @@
                         <th>Kecamatan</th>
                         <th>Tahun</th>
                         <th>Kategori</th>
+                        <th>Rating</th>
                         <th>Cover</th>
                         <th>Aksi</th>
                     </tr>
@@ -191,6 +189,7 @@
                         <td>{{ $wisata->kecamatan }}</td>
                         <td>{{ $wisata->year }}</td>
                         <td>{{ $wisata->category->category_name ?? '-' }}</td>
+                        <td>{{ number_format($wisata->rating, 1) ?? '-' }}</td>
                         <td>
                             @if(Str::startsWith($wisata->cover_image, 'http'))
                                 <img src="{{ $wisata->cover_image }}" width="230" class="img-thumbnail" alt="Cover">

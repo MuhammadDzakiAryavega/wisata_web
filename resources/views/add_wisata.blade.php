@@ -108,6 +108,15 @@
                         </select>
                     </div>
 
+                    <!-- Kolom Rating Baru -->
+                    <div class="col-md-6">
+                        <label class="form-label">Rating</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-star"></i></span>
+                            <input type="number" class="form-control" name="rating" step="0.1" min="0" max="5" placeholder="Contoh: 4.5" required>
+                        </div>
+                    </div>
+
                     <div class="col-md-6">
                         <label class="form-label">Gambar</label>
                         <input type="file" class="form-control" name="cover_image" accept="image/*">
