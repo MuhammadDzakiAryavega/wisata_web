@@ -153,6 +153,9 @@ class WisataController extends Controller
 
     public function dashboard()
     {
+        if (!Auth::check()) {
+        return redirect()->route('login.form')->with('message', 'ini halaman Admin!!');
+    }
         $wisatas = Wisata::all();
         return view('admin.dashboard', compact('wisatas'));
     }

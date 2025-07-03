@@ -58,18 +58,19 @@
                             $imagePath = Str::startsWith($wisata->cover_image, 'http') 
                                 ? $wisata->cover_image 
                                 : asset('images/' . $wisata->cover_image);
-                            
+
                             $rating = $wisata->rating;
                             $fullStars = floor($rating);
                             $halfStar = ($rating - $fullStars) >= 0.5;
                             $emptyStars = 5 - $fullStars - ($halfStar ? 1 : 0);
                         @endphp
+
                         <img src="{{ $imagePath }}" class="card-img-top" alt="Gambar {{ $wisata->title }}">
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title">{{ $wisata->title }}</h5>
 
                             {{-- Rating Bintang --}}
-                            <p class="mb-2 star-rating">
+                            <p class="mb-3 star-rating">
                                 @for ($i = 0; $i < $fullStars; $i++)
                                     <i class="fas fa-star"></i>
                                 @endfor
@@ -85,9 +86,6 @@
                                 <span class="text-dark ms-1">({{ number_format($rating, 1) }})</span>
                             </p>
 
-                            <p class="card-text mb-3">
-                                {{ \Illuminate\Support\Str::limit($wisata->description, 100) }}
-                            </p>
                             <a href="{{ route('wisata.show', $wisata->id) }}" class="btn btn-success mt-auto">Lihat Detail</a>
                         </div>
                     </div>

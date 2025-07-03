@@ -11,7 +11,7 @@
   <!-- Bootstrap & Font Awesome -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
 
   <style>
     html, body {
@@ -98,58 +98,66 @@
         <img src="{{ asset('images/rancak.png') }}" alt="Logo" class="me-2" />
         <span>Wisata</span>
       </a>
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
         aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarContent">
-        <!-- Menu kiri -->
+        <!-- Menu Kiri -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
           <li class="nav-item"><a class="nav-link active" href="/form">Destination</a></li>
           <li class="nav-item"><a class="nav-link active" href="/top-rate">Top Rate</a></li>
           <li class="nav-item"><a class="nav-link active" href="/contact">Contact</a></li>
-          <li class="nav-item"><a class="nav-link active" href="/dashboard">Dashboard</a></li>
+
+          @auth
+            @if (Auth::user()->role === 'admin')
+              <li class="nav-item">
+                <a class="nav-link active" href="/dashboard">Dashboard</a>
+              </li>
+            @endif
+          @endauth
         </ul>
 
         <!-- Search -->
-        <form class="d-flex me-3" role="search" action="{{ url('/form') }}" method="GET">
-          <input class="form-control me-2" type="search" name="q" placeholder="Search" />
+        <form class="d-flex me-3" role="search" action="{{ request()->is('top-rate') ? url('/top-rate') : url('/form') }}" method="GET">
+          <input class="form-control me-2" type="search" name="q" placeholder="Search" value="{{ request('q') }}" />
           <button class="btn btn-outline-light" type="submit"><i class="fas fa-search"></i></button>
         </form>
 
         <!-- Auth -->
         @auth
-        <div class="d-flex align-items-center">
-          <span class="text-white me-3">{{ Auth::user()->name }}</span>
-          <form action="{{ route('logout') }}" method="POST" onsubmit="return confirm('Yakin ingin logout?')">
-            @csrf
-            <button type="submit" class="btn btn-outline-light btn-sm">Logout</button>
-          </form>
-        </div>
+          <div class="d-flex align-items-center">
+            <span class="text-white me-3">{{ Auth::user()->name }}</span>
+            <form action="{{ route('logout') }}" method="POST" onsubmit="return confirm('Yakin ingin logout?')">
+              @csrf
+              <button type="submit" class="btn btn-outline-light btn-sm">Logout</button>
+            </form>
+          </div>
         @else
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link text-white" href="/login">Login</a>
-          </li>
-        </ul>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link text-white" href="/login">Login</a>
+            </li>
+          </ul>
         @endauth
       </div>
     </div>
   </nav>
 
-  <!-- Main -->
+  <!-- Main Content -->
   <main>
     @yield('content')
   </main>
 
-  <!-- Footer Sticky -->
+  <!-- Footer -->
   <footer>
     <small>&copy; {{ date('Y') }} by Arya A.Md.Kom. All rights reserved.</small>
   </footer>
 
-  <!-- Script -->
+  <!-- Bootstrap Script -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

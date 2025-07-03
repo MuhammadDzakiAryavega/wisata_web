@@ -22,6 +22,6 @@ class DatabaseSeeder extends Seeder
         //Wisata::factory()->count(30)->create();
         //$this->call(ContactSeeder::class);
         //$this->call(KabupatenSeeder::class);
-        // User::factory(5)->create();
+         User::factory(7)->create();
     }
 }
