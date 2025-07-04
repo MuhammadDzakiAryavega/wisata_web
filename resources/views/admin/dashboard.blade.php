@@ -33,7 +33,6 @@
         .sidebar.expanded {
             width: 200px;
             align-items: flex-start;
-            padding-left: 15px;
         }
 
         .sidebar .toggle-btn {
@@ -50,46 +49,43 @@
         .sidebar a.menu-item {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             width: 100%;
-            padding: 10px 0;
+            padding: 10px 15px;
             color: white;
             text-decoration: none;
-            transition: background 0.2s, padding 0.3s;
+            transition: background 0.2s;
+            gap: 12px;
         }
 
         .sidebar a.menu-item:hover {
             background-color: #2b6cb0;
         }
 
+        .sidebar a.menu-item i {
+            min-width: 20px;
+            text-align: center;
+        }
+
         .sidebar a.menu-item span {
-            color: white;
-            margin-left: 10px;
             display: none;
             white-space: nowrap;
         }
 
-        .sidebar.expanded a.menu-item {
-            justify-content: flex-start;
-            padding-left: 15px;
-        }
-
         .sidebar.expanded a.menu-item span {
-            display: inline-block;
+            display: inline;
         }
 
         .bottom-menu {
             margin-top: auto;
-            margin-bottom: 20px;
+            padding: 15px 0;
             width: 100%;
             display: flex;
             flex-direction: column;
-            align-items: center;
         }
 
         .sidebar.expanded .bottom-menu {
-            align-items: flex-start;
-            padding-left: 15px;
+            padding-left: 0;
         }
 
         .content {
@@ -165,12 +161,10 @@
             <i class="fas fa-th-large"></i>
             <span>Data Wisata</span>
         </a>
-
         <a href="{{ url('/list_contact') }}" class="menu-item">
             <i class="fas fa-table"></i>
             <span>Data Masukan</span>
         </a>
-
         <a href="{{ url('/users') }}" class="menu-item">
             <i class="fas fa-users"></i>
             <span>Data User</span>
@@ -178,16 +172,14 @@
 
         <!-- Menu bawah -->
         <div class="bottom-menu">
-            <a href="/" class="menu-item mb-2">
+            <a href="/" class="menu-item">
                 <i class="fas fa-home"></i>
                 <span>Lihat Web</span>
             </a>
-
-            <a href="{{ url('/dashboard') }}" class="menu-item mb-2">
+            <a href="{{ url('/dashboard') }}" class="menu-item">
                 <i class="fas fa-tachometer-alt"></i>
                 <span>Back Dashboard</span>
             </a>
-
             <a href="#" class="menu-item" onclick="event.preventDefault(); confirmLogout();">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>Logout</span>
@@ -224,6 +216,5 @@
             }
         }
     </script>
-
 </body>
 </html>

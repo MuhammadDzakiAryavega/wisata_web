@@ -32,7 +32,6 @@
         .sidebar.expanded {
             width: 200px;
             align-items: flex-start;
-            padding-left: 15px;
         }
 
         .sidebar .toggle-btn {
@@ -49,12 +48,13 @@
         .sidebar a.menu-item {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             width: 100%;
-            padding: 10px 0;
+            padding: 10px 15px;
             color: white;
             text-decoration: none;
-            transition: background 0.2s, padding 0.3s;
+            transition: background 0.2s;
+            gap: 12px;
         }
 
         .sidebar a.menu-item:hover {
@@ -62,33 +62,20 @@
         }
 
         .sidebar a.menu-item span {
-            color: white;
-            margin-left: 10px;
             display: none;
             white-space: nowrap;
         }
 
-        .sidebar.expanded a.menu-item {
-            justify-content: flex-start;
-            padding-left: 15px;
-        }
-
         .sidebar.expanded a.menu-item span {
-            display: inline-block;
+            display: inline;
         }
 
         .bottom-menu {
             margin-top: auto;
-            margin-bottom: 20px;
+            padding: 15px 0;
             width: 100%;
             display: flex;
             flex-direction: column;
-            align-items: center;
-        }
-
-        .sidebar.expanded .bottom-menu {
-            align-items: flex-start;
-            padding-left: 15px;
         }
 
         .content {
@@ -99,6 +86,10 @@
 
         .sidebar.expanded ~ .content {
             margin-left: 200px;
+        }
+
+        table.table-hover tbody tr:hover {
+            background-color: #f1f5f9;
         }
     </style>
 </head>
@@ -126,16 +117,14 @@
     </a>
 
     <div class="bottom-menu">
-        <a href="/" class="menu-item mb-2">
+        <a href="/" class="menu-item">
             <i class="fas fa-home"></i>
             <span>Lihat Web</span>
         </a>
-
-        <a href="{{ url('/dashboard') }}" class="menu-item mb-2">
+        <a href="{{ url('/dashboard') }}" class="menu-item">
             <i class="fas fa-tachometer-alt"></i>
             <span>Back Dashboard</span>
         </a>
-
         <a href="#" class="menu-item" onclick="event.preventDefault(); confirmLogout();">
             <i class="fas fa-sign-out-alt"></i>
             <span>Logout</span>
@@ -150,81 +139,89 @@
 <!-- Konten -->
 <div class="content">
     <div class="container">
-        <h1 class="mb-4">Daftar Wisata</h1>
+        <div class="card shadow rounded-4 p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3 class="mb-0">📍 Daftar Wisata</h3>
+                <a href="{{ route('wisata.create') }}" class="btn btn-success rounded-pill">
+                    <i class="fas fa-plus-circle me-1"></i> Tambah Wisata
+                </a>
+            </div>
 
-        <div class="text-end mb-3">
-            <a href="{{ route('wisata.create') }}" class="btn btn-primary">
-                <i class="fas fa-plus-circle"></i> Tambah Wisata
-            </a>
+            @if(session('success'))
+                <div class="alert alert-success rounded-3">{{ session('success') }}</div>
+            @endif
+
+            @if($wisatas->count())
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle table-bordered text-start">
+                        <thead class="table-success text-center"> <!-- atau text-start jika ingin rata kiri semua -->
+                            <tr>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>Deskripsi</th>
+                                <th>Kabupaten</th>
+                                <th>Kecamatan</th>
+                                <th>Tahun</th>
+                                <th>Kategori</th>
+                                <th>Rating</th>
+                                <th>Cover</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($wisatas as $wisata)
+                            <tr>
+                                <td>{{ $wisatas->firstItem() + $loop->index }}</td>
+                                <td>{{ $wisata->title }}</td>
+                                <td class="text-start">{{ Str::limit($wisata->description, 80) }}</td>
+                                <td>{{ $wisata->kabupaten->kabupaten_name ?? '-' }}</td>
+                                <td>{{ $wisata->kecamatan }}</td>
+                                <td>{{ $wisata->year }}</td>
+                                <td>{{ $wisata->category->category_name ?? '-' }}</td>
+                                <td>
+                                    <span class="badge bg-warning text-dark fs-6">
+                                        ★ {{ number_format($wisata->rating, 1) ?? '-' }}
+                                    </span>
+                                </td>
+                                <td>
+                                    @if(Str::startsWith($wisata->cover_image, 'http'))
+                                        <img src="{{ $wisata->cover_image }}" class="img-thumbnail rounded shadow-sm" style="max-width: 100px;" alt="Cover">
+                                    @else
+                                        <img src="{{ asset('images/' . $wisata->cover_image) }}" class="img-thumbnail rounded shadow-sm" style="max-width: 100px;" alt="Cover">
+                                    @endif
+                                </td>
+                                <td>
+                                    <a href="{{ route('wisata.edit', $wisata->id) }}" class="btn btn-warning btn-sm mb-1">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <form action="{{ route('wisata.destroy', $wisata->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="d-flex justify-content-center mt-3">
+                    {{ $wisatas->links('pagination::bootstrap-5') }}
+                </div>
+            @else
+                <div class="alert alert-info text-center rounded-3">Belum ada data wisata.</div>
+            @endif
         </div>
-
-        @if(session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
-
-        @if($wisatas->count())
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped table-sm">
-                <thead class="table-success">
-                    <tr>
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>Deskripsi</th>
-                        <th>Kabupaten</th>
-                        <th>Kecamatan</th>
-                        <th>Tahun</th>
-                        <th>Kategori</th>
-                        <th>Rating</th>
-                        <th>Cover</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($wisatas as $wisata)
-                    <tr>
-                        <td>{{ $wisatas->firstItem() + $loop->index }}</td>
-                        <td>{{ $wisata->title }}</td>
-                        <td>{{ Str::limit($wisata->description, 100) }}</td>
-                        <td>{{ $wisata->kabupaten->kabupaten_name ?? '-' }}</td>
-                        <td>{{ $wisata->kecamatan }}</td>
-                        <td>{{ $wisata->year }}</td>
-                        <td>{{ $wisata->category->category_name ?? '-' }}</td>
-                        <td>{{ number_format($wisata->rating, 1) ?? '-' }}</td>
-                        <td>
-                            @if(Str::startsWith($wisata->cover_image, 'http'))
-                                <img src="{{ $wisata->cover_image }}" width="230" class="img-thumbnail" alt="Cover">
-                            @else
-                                <img src="{{ asset('images/' . $wisata->cover_image) }}" width="230" class="img-thumbnail" alt="Cover">
-                            @endif
-                        </td>
-                        <td>
-                            <a href="{{ route('wisata.edit', $wisata->id) }}" class="btn btn-warning btn-sm mb-1">Edit</a>
-                            <form action="{{ route('wisata.destroy', $wisata->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                            </form>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-
-        <div class="mt-3">
-            {{ $wisatas->links('pagination::bootstrap-5') }}
-        </div>
-        @else
-            <div class="alert alert-info">Belum ada data wisata.</div>
-        @endif
     </div>
 </div>
 
 <!-- Script Sidebar -->
 <script>
     function toggleSidebar() {
-        const sidebar = document.getElementById('sidebar');
-        sidebar.classList.toggle('expanded');
+        document.getElementById('sidebar').classList.toggle('expanded');
     }
 
     function confirmLogout() {
