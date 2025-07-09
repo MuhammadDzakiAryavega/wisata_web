@@ -136,7 +136,7 @@ class WisataController extends Controller
     public function topRated()
     {
     if (!Auth::check()) {
-        return redirect()->route('login.form')->with('message', 'Anda harus Login terlebih dahulu jika ingin melihat Favorit!!');
+        return redirect()->route('login.form')->with('message', 'Anda harus Login terlebih dahulu jika ingin melihat Top Rate!!');
     }
 
     $query = Wisata::orderBy('rating', 'desc'); // urutkan berdasarkan rating tertinggi

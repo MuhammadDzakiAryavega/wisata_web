@@ -49,13 +49,17 @@
     .sidebar a.menu-item {
       display: flex;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center; /* Pusatkan ikon secara horizontal saat tidak expanded */
       width: 100%;
       padding: 10px 15px;
       color: white;
       text-decoration: none;
-      transition: background 0.2s;
+      transition: background 0.2s, justify-content 0.4s;
       gap: 12px;
+    }
+
+    .sidebar.expanded a.menu-item {
+      justify-content: flex-start; /* Saat sidebar terbuka, ikon dan teks ke kiri */
     }
 
     .sidebar a.menu-item:hover {
